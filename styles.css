@@ -1,0 +1,108 @@
+/* Grundlegendes Styling */
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #ffffff;
+    overflow: hidden;
+}
+
+.grid {
+    display: grid;
+
+    /* Dynamisches Grid: Feste Abstände */
+    grid-template-columns: repeat(4, 1fr); /* 4 Spalten */
+    grid-template-rows: repeat(3, 1fr);   /* 3 Zeilen */
+
+    /* Abstand zwischen den Kacheln */
+    gap: 10px;
+    width: calc(100% - 7em); /* Abstand links/rechts */
+    height: calc(100% - 7em); /* Abstand oben/unten */
+    padding: 10px;
+    background-color: #ffffff;
+    box-sizing: border-box;
+}
+
+.tile {
+    background-color: #007BFF;
+    color: white;
+    font-size: calc(1vw + 1vh);
+    border-radius: 8px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tile.clicked {
+    background-color: #FF0000; /* Rot bei geklickten Kacheln */
+}
+
+/* Off-Canvas Popup Styling */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.hidden {
+    display: none;
+}
+
+.card {
+    background-color: #ffffff;
+    width: 80%;
+    max-width: 600px;
+    min-height: 50%;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    position: relative;
+    font-size: 1.6em;
+    line-height: 1.5;
+}
+
+.card-content {
+    padding: 10px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.reset-button {
+    position: fixed; /* Fixiert den Button am unteren Bildschirmrand */
+    bottom: 20px; /* Abstand vom unteren Rand */
+    left: 50%; /* Zentriert den Button horizontal */
+    transform: translateX(-50%); /* Verschiebt den Button, um ihn perfekt zu zentrieren */
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #FF5733;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 1000; /* Stellt sicher, dass der Button über allem liegt */
+}
+
+.reset-button:hover {
+    background-color: #C0392B;
+}
