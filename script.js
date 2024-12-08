@@ -97,10 +97,21 @@ for (let row = 1; row <= rows; row++) {
                 localStorage.setItem('clickedTiles', JSON.stringify(clickedTiles));
             }
         
-            // Dynamisch das Bild und den Text ins Popup laden
-            popup.querySelector(".card-img-top").src = task.image; // Setzt das Bild
-            popup.querySelector(".card-img-top").alt = `Bild für ${tileName}`; // Alt-Text für Barrierefreiheit
-            popupContent.innerHTML = task.text; // Setzt den Task-Text
+            // Dynamisches Bild setzen mit Ladeüberprüfung
+            const imgElement = popup.querySelector(".card-img-top");
+            const newImageSrc = task.image;
+        
+            // Verstecke das Bild, während es lädt
+            imgElement.style.visibility = "hidden";
+            imgElement.onload = () => {
+                imgElement.style.visibility = "visible"; // Zeige das Bild, wenn es fertig geladen ist
+            };
+        
+            imgElement.src = newImageSrc; // Setze das neue Bild
+            imgElement.alt = `Bild für ${tileName}`; // Setze den Alt-Text
+        
+            // Dynamischen Text setzen
+            popupContent.innerHTML = task.text;
             popup.classList.remove('hidden');
         });
         

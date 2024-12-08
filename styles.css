@@ -109,7 +109,7 @@ body {
     cursor: pointer; 
     transition: transform 0.2s ease;
     position: fixed;
-    bottom: 5px;
+    bottom: calc(env(safe-area-inset-bottom) + 5px);
     left: 50%;
     transform: translateX(-50%);
 }
