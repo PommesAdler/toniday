@@ -21,7 +21,7 @@ body {
 }
 
 .tile {
-    background-color: #56d0ef;
+    background-color: #005267;;
     color: white;
     font-size: calc(1vw + 1vh);
     border-radius: 8px;
@@ -34,7 +34,8 @@ body {
 }
 
 .tile.clicked {
-    background-color: #f5717a; 
+    background-color: #a22830; 
+    text-decoration: line-through;
 }
 
 .popup {
