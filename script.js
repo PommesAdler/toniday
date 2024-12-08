@@ -6,26 +6,62 @@ const resetButton = document.getElementById('reset-button');
 
 // Aufgaben für jede Kachel, mit HTML für das Popup
 const tasks = [
-    "Ooooh lecker. Iss einen Teelöffel Senf.",
-    "Ordnung muss sein. Sortiere diese keimenden Kartoffeln nach ihrer Größe.",
-    `Peinlich. Singe einen Part eines dieser Lieder laut vor. Das Publikum wählt.<ul>
-        <li>Du brauchst sie, wie der Fisch das Fahrrad</li>
-        <li>verlieben verloren vergessen verzeihen - Wolfgang Petry.</li>
-        <li>An Angel - Kelly Family</li>
-    </ul>`,
-    "Saufautomat. Trinke einen Jägermeister-Shot.",
-    "Blamieren oder Kassieren. Kannst du dieses bekannte Wort richtige schreiben? Wenn du Schiss hast, wähle eine Person aus dem Publikum, die du dafür zu einem deliziösen Frühstück einlädst.",
-    "Glück gehabt. Wir gewähren es Dir, einfach so weiterzumachen. Einfach, weil du du bist <3",
-    "Muhahaha. Du liebst Dinge. Gib eine Kleinigkeit deines Geschenketisches an eine Person aus dem Publikum ab.",
-    `Peinlich. Singe einen Part eines dieser Lieder laut vor. Die einzig wahren ModeratorInnen wählen. Wenn du einen Jägermeister-Shot trinkst, darfst du selber wählen.<ul>
-        <li>Antonia aus Tirol (ich bin viel schöner) - Tonia feat. Hollidays</li>
-        <li>My heart will Go on - Celine Dion</li>
-        <li>What's Up - 4 Non Blondes</li>
-    </ul>`,
-    "Mhhh lecker. Iss einen Teelöffel Kapern.",
-    "Mit 30 ist man doch super lazer und steht über den Dingen. Beweise es. Lasse alle ein wunderschönes Foto aus deiner Vergangenheit ansehen.",
-    "Blamieren oder Kassieren. Kannst du dieses bekannte Wort richtig buchstabieren? Wenn du Schiss hast, wähle eine Person aus dem Publikum, der du dann eine schöne Überraschung schuldest.",
-    "Sportliche Ertüchtigung. Wähle eine Person aus dem Publikum, die mit dir 5 mal einen Ball hin und her wirft. Einfach oder? Den Ball haben wir schon mal für euch ausgewählt."
+    { 
+        text: "Ooooh lecker. Iss einen Teelöffel Senf.",
+        image: "./img/senf.png"
+    },
+    { 
+        text: "Ordnung muss sein. Sortiere diese keimenden Kartoffeln nach ihrer Größe.",
+        image: "./img/kartoffel.png"
+    },
+    { 
+        text: `Peinlich. Singe einen Part eines dieser Lieder laut vor. Das Publikum wählt. <br><ul class="list-group list-group-flush">
+            <li class="list-group-item">Du brauchst sie, wie der Fisch das Fahrrad</li>
+            <li class="list-group-item">Verlieben, verloren, vergessen, verzeihen - Wolfgang Petry</li>
+            <li class="list-group-item">An Angel - Kelly Family</li>
+        </ul>`,
+        image: "./img/mikrofon.png"
+    },
+    { 
+        text: "Saufautomat. Trinke einen Jägermeister-Shot.",
+        image: "./img/jaeger.png"
+    },
+    { 
+        text: "Blamieren oder Kassieren. Kannst du dieses bekannte Wort richtig schreiben? Wenn du Schiss hast, wähle eine Person aus dem Publikum, die du dafür zu einem deliziösen Frühstück einlädst.",
+        image: "./img/blamieren.png"
+    },
+    { 
+        text: "Glück gehabt. Wir gewähren es dir, einfach so weiterzumachen. Einfach, weil du du bist <3",
+        image: "./img/glueck.png"
+    },
+    { 
+        text: "Muhahaha. Du liebst Dinge. Gib eine Kleinigkeit deines Geschenketisches an eine Person aus dem Publikum ab.",
+        image: "./img/geschenk.png"
+    },
+    { 
+        text: `Peinlich. Singe einen Part eines dieser Lieder laut vor. Die einzig wahren ModeratorInnen wählen. Wenn du einen Jägermeister-Shot trinkst, darfst du selber wählen. <br><ul class="list-group list-group-flush">
+            <li class="list-group-item">Antonia aus Tirol - Ich bin viel schöner</li>
+            <li class="list-group-item">My Heart Will Go On - Celine Dion</li>
+            <li class="list-group-item">What's Up - 4 Non Blondes</li>
+        </ul>`,
+        image: "./img/mikrofon.png"
+    },
+    { 
+        text: "Mhhh lecker. Iss einen Teelöffel Kapern.",
+        image: "./img/kapern.png"
+    },
+    { 
+        text: "Mit 30 ist man doch super lässig und steht über den Dingen. Beweise es. Lasse alle ein wunderschönes Foto aus deiner Vergangenheit ansehen.",
+        image: "./img/peinlich.png"
+    },
+    { 
+        text: "Blamieren oder Kassieren. Kannst du dieses bekannte Wort richtig buchstabieren? Wenn du Schiss hast, wähle eine Person aus dem Publikum, der du dann eine schöne Überraschung schuldest.",
+        image: "./img/blamieren.png"
+    },
+    { 
+        text: "Sportliche Ertüchtigung. Wähle eine Person aus dem Publikum, die mit dir 5 mal einen Ball hin und her wirft. Einfach oder? Den Ball haben wir schon mal für euch ausgewählt.",
+        image: "./img/detlef.png"
+    }
 ];
 
 // Anzahl der Zeilen und Spalten
@@ -60,9 +96,14 @@ for (let row = 1; row <= rows; row++) {
                 clickedTiles.push(tileName);
                 localStorage.setItem('clickedTiles', JSON.stringify(clickedTiles));
             }
-            popupContent.innerHTML = task; // HTML-Inhalt für das Popup
+        
+            // Dynamisch das Bild und den Text ins Popup laden
+            popup.querySelector(".card-img-top").src = task.image; // Setzt das Bild
+            popup.querySelector(".card-img-top").alt = `Bild für ${tileName}`; // Alt-Text für Barrierefreiheit
+            popupContent.innerHTML = task.text; // Setzt den Task-Text
             popup.classList.remove('hidden');
         });
+        
 
         grid.appendChild(tile);
         taskIndex++;
