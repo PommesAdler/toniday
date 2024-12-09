@@ -4,7 +4,6 @@ const popupContent = document.getElementById('popup-content');
 const closePopup = document.getElementById('close-popup');
 const resetButton = document.getElementById('reset-button');
 
-// Aufgaben für jede Kachel, mit HTML für das Popup
 const tasks = [
     { 
         text: "Ooooh lecker. Iss einen Teelöffel Senf.",
@@ -64,14 +63,11 @@ const tasks = [
     }
 ];
 
-// Anzahl der Zeilen und Spalten
-const rows = 3; // 4 Zeilen
-const cols = 4; // 6 Spalten
+const rows = 3;
+const cols = 4; 
 
-// Lade gespeicherte geklickte Kacheln
 let clickedTiles = JSON.parse(localStorage.getItem('clickedTiles')) || [];
 
-// Kacheln generieren
 let taskIndex = 0;
 for (let row = 1; row <= rows; row++) {
     for (let col = 1; col <= cols; col++) {
@@ -81,11 +77,11 @@ for (let row = 1; row <= rows; row++) {
         const tile = document.createElement('div');
         tile.classList.add('tile');
         if (clickedTiles.includes(tileName)) {
-            tile.classList.add('clicked'); // Geklickte Kachel rot markieren
+            tile.classList.add('clicked');
         }
 
         const span = document.createElement('span');
-        span.textContent = tileName; // Kachel zeigt nur den Namen
+        span.textContent = tileName;
         tile.appendChild(span);
 
         const task = tasks[taskIndex] || `Aufgabe für ${tileName} fehlt!`;
@@ -97,18 +93,16 @@ for (let row = 1; row <= rows; row++) {
                 localStorage.setItem('clickedTiles', JSON.stringify(clickedTiles));
             }
         
-            // Dynamisches Bild setzen mit Ladeüberprüfung
             const imgElement = popup.querySelector(".card-img-top");
             const newImageSrc = task.image;
         
-            // Verstecke das Bild, während es lädt
             imgElement.style.visibility = "hidden";
             imgElement.onload = () => {
                 imgElement.style.visibility = "visible"; // Zeige das Bild, wenn es fertig geladen ist
             };
         
-            imgElement.src = newImageSrc; // Setze das neue Bild
-            imgElement.alt = `Bild für ${tileName}`; // Setze den Alt-Text
+            imgElement.src = newImageSrc;
+            imgElement.alt = `Bild für ${tileName}`;
         
             // Dynamischen Text setzen
             popupContent.innerHTML = task.text;
@@ -121,7 +115,6 @@ for (let row = 1; row <= rows; row++) {
     }
 }
 
-// Popup schließen (Button oder außerhalb klicken)
 closePopup.addEventListener('click', closePopupHandler);
 
 popup.addEventListener('click', (event) => {
@@ -130,19 +123,16 @@ popup.addEventListener('click', (event) => {
     }
 });
 
-// Esc-Taste zum Schließen
 document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
         closePopupHandler();
     }
 });
 
-// Funktion zum Schließen des Popups
 function closePopupHandler() {
     popup.classList.add('hidden');
 }
 
-// Zurücksetzen der Kacheln
 resetButton.addEventListener('click', () => {
     clickedTiles = [];
     localStorage.removeItem('clickedTiles'); // Speicher zurücksetzen
@@ -150,3 +140,4 @@ resetButton.addEventListener('click', () => {
         tile.classList.remove('clicked');
     });
 });
+

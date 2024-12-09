@@ -8,21 +8,21 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="d-flex justify-content-center mt-3">
-        <button id="reset-button" class="btn btn-primary rounded-circle reload-button">
-            &#x21bb; <!-- Unicode für ein Reload-Symbol -->
-        </button>
-    </div>
-    
     <div class="grid" id="grid"></div>
 
-    <!-- Off-Canvas Popup -->
+    <div class="d-flex justify-content-center mt-3">
+        <button id="reset-button" class="btn btn-primary rounded-circle reload-button">
+            &#x21bb;
+        </button>
+    </div>
+
+    
     <div id="popup" class="popup hidden">
         <div class="card card-size">
             <img class="card-img-top card-style" src="" alt="Card image cap">
             <button class="close-btn" id="close-popup">×</button>
             <div class="card-body card-text" id="popup-content">
-                <!-- Der Text wird dynamisch eingefügt -->
+                <!-- dynamic content -->
             </div>
         </div>
     </div>
