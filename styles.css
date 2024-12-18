@@ -8,12 +8,25 @@ body {
     overflow: hidden;
 }
 
+.title {
+    margin-top: 0.5em;
+}
+
+.grid-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
 .grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    width: calc(100% - 7em); 
-    height: calc(100% - 7em); 
+    width: 100%; 
+    height: 100%; 
     gap: 10px;
     padding: 10px;
     background-color: #ffffff;
@@ -102,6 +115,11 @@ body {
     cursor: pointer;
 }
 
+.button-container {
+    margin-bottom: 1.5em;
+    margin-top: 1em;
+}
+
 .reload-button {
     width: 50px; 
     height: 50px; 
@@ -115,10 +133,6 @@ body {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); 
     cursor: pointer; 
     transition: transform 0.2s ease;
-    position: fixed;
-    bottom: calc(env(safe-area-inset-bottom) + 5px);
-    left: 50%;
-    transform: translateX(-50%);
 }
 
 .reload-button:hover {
@@ -141,7 +155,6 @@ body {
     padding: 10px;
     background-color: #ffffff;
     box-sizing: border-box;
-    margin-bottom: 60px;
 }
 
 .card-text {
