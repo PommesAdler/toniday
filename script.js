@@ -63,57 +63,76 @@ const tasks = [
     }
 ];
 
-const rows = 3;
-const cols = 4; 
-
 let clickedTiles = JSON.parse(localStorage.getItem('clickedTiles')) || [];
 
-let taskIndex = 0;
-for (let row = 1; row <= rows; row++) {
-    for (let col = 1; col <= cols; col++) {
-        const letter = String.fromCharCode(65 + col - 1); // A, B, C...
-        const tileName = `${letter}${row}`; // A1, A2, ...
+let rows = 3;
+let cols = 4;
 
-        const tile = document.createElement('div');
-        tile.classList.add('tile');
-        if (clickedTiles.includes(tileName)) {
-            tile.classList.add('clicked');
-        }
-
-        const span = document.createElement('span');
-        span.textContent = tileName;
-        tile.appendChild(span);
-
-        const task = tasks[taskIndex] || `Aufgabe für ${tileName} fehlt!`;
-
-        tile.addEventListener('click', () => {
-            if (!tile.classList.contains('clicked')) {
-                tile.classList.add('clicked');
-                clickedTiles.push(tileName);
-                localStorage.setItem('clickedTiles', JSON.stringify(clickedTiles));
-            }
-        
-            const imgElement = popup.querySelector(".card-img-top");
-            const newImageSrc = task.image;
-        
-            imgElement.style.visibility = "hidden";
-            imgElement.onload = () => {
-                imgElement.style.visibility = "visible"; // Zeige das Bild, wenn es fertig geladen ist
-            };
-        
-            imgElement.src = newImageSrc;
-            imgElement.alt = `Bild für ${tileName}`;
-        
-            // Dynamischen Text setzen
-            popupContent.innerHTML = task.text;
-            popup.classList.remove('hidden');
-        });
-        
-
-        grid.appendChild(tile);
-        taskIndex++;
+function updateGridLayout() {
+    if (window.innerWidth < 768) {
+        rows = 4;
+        cols = 3;
+    } else {
+        rows = 3;
+        cols = 4;
     }
 }
+
+updateGridLayout();
+window.addEventListener('resize', () => {
+    updateGridLayout();
+});
+
+function renderGrid() {
+    let taskIndex = 0;
+    for (let row = 1; row <= rows; row++) {
+        for (let col = 1; col <= cols; col++) {
+            const letter = String.fromCharCode(65 + col - 1); // A, B, C...
+            const tileName = `${letter}${row}`; // A1, A2, ...
+
+            const tile = document.createElement('div');
+            tile.classList.add('tile');
+            if (clickedTiles.includes(tileName)) {
+                tile.classList.add('clicked');
+            }
+
+            const span = document.createElement('span');
+            span.textContent = tileName;
+            tile.appendChild(span);
+
+            const task = tasks[taskIndex] || `Aufgabe für ${tileName} fehlt!`;
+
+            tile.addEventListener('click', () => {
+                if (!tile.classList.contains('clicked')) {
+                    tile.classList.add('clicked');
+                    clickedTiles.push(tileName);
+                    localStorage.setItem('clickedTiles', JSON.stringify(clickedTiles));
+                }
+            
+                const imgElement = popup.querySelector(".card-img-top");
+                const newImageSrc = task.image;
+            
+                imgElement.style.visibility = "hidden";
+                imgElement.onload = () => {
+                    imgElement.style.visibility = "visible"; // Zeige das Bild, wenn es fertig geladen ist
+                };
+            
+                imgElement.src = newImageSrc;
+                imgElement.alt = `Bild für ${tileName}`;
+            
+                // Dynamischen Text setzen
+                popupContent.innerHTML = task.text;
+                popup.classList.remove('hidden');
+            });
+            
+
+            grid.appendChild(tile);
+            taskIndex++;
+        }
+    }
+}
+
+renderGrid();
 
 closePopup.addEventListener('click', closePopupHandler);
 
